@@ -1,4 +1,4 @@
-package nicestring
+package weekthree.nicestring
 
 fun String.isNice(): Boolean {
 

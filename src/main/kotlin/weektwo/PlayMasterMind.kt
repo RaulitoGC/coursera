@@ -1,3 +1,5 @@
+package weektwo
+
 import kotlin.random.Random
 
 val ALPHABET = 'A'..'F'

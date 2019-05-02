@@ -1,3 +1,5 @@
+package weekfour
+
 fun createSquareBoard(width: Int): SquareBoard = object
     : SquareBoard {
 

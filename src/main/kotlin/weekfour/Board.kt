@@ -1,3 +1,5 @@
+package weekfour
+
 data class CellWithInformation<T>(val cell: Cell, var t: T?)
 
 data class Cell(val i: Int, val j: Int) {

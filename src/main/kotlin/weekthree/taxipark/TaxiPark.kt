@@ -1,4 +1,4 @@
-package TaxiPark
+package weekthree.taxipark
 
 data class TaxiPark(
     val allDrivers: Set<Driver>,
