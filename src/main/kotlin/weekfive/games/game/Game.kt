@@ -1,6 +1,7 @@
-package games.game
+package weekfive.games.game
 
-import board.Direction
+import weekfour.Direction
+
 
 interface Game {
     fun initialize()

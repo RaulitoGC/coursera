@@ -1,10 +1,11 @@
-package games.game2048
+package weekfive.games.game2048
 
-import board.Cell
-import board.Direction
-import board.GameBoard
-import board.createGameBoard
-import games.game.Game
+import weekfive.games.game.Game
+import weekfour.Cell
+import weekfour.Direction
+import weekfour.GameBoard
+import weekfour.createGameBoard
+
 
 /*
  * Your task is to implement the game 2048 https://en.wikipedia.org/wiki/2048_(video_game).
@@ -41,7 +42,10 @@ class Game2048(private val initializer: Game2048Initializer<Int>) : Game {
  * Add a new value produced by 'initializer' to a specified cell in a board.
  */
 fun GameBoard<Int?>.addNewValue(initializer: Game2048Initializer<Int>) {
-    TODO()
+    val pair = initializer.nextValue(this)
+    pair?.let { (cell, value) ->
+        this[cell] = value
+    }
 }
 
 /*
@@ -53,7 +57,21 @@ fun GameBoard<Int?>.addNewValue(initializer: Game2048Initializer<Int>) {
  * Return 'true' if the values were moved and 'false' otherwise.
  */
 fun GameBoard<Int?>.moveValuesInRowOrColumn(rowOrColumn: List<Cell>): Boolean {
-    TODO()
+
+    val listValues = kotlin.collections.mutableListOf<Int?>()
+    rowOrColumn.forEach { cell ->
+        listValues.add(this[cell])
+    }
+
+    val mergedList = listValues.moveAndMergeEqual { it * 2 }
+
+    if (listValues == mergedList || mergedList.isEmpty()) return false
+
+    for (i in 0..rowOrColumn.lastIndex) {
+        this[rowOrColumn[i]] = if (i <= mergedList.lastIndex) mergedList[i] else null
+    }
+
+    return true
 }
 
 /*
@@ -64,5 +82,36 @@ fun GameBoard<Int?>.moveValuesInRowOrColumn(rowOrColumn: List<Cell>): Boolean {
  * Return 'true' if the values were moved and 'false' otherwise.
  */
 fun GameBoard<Int?>.moveValues(direction: Direction): Boolean {
-    TODO()
+    var boardWereMoved = false
+    when (direction) {
+        Direction.UP -> {
+            for (j in 1..width) {
+                if (moveValuesInRowOrColumn(getColumn(1..width, j))) {
+                    boardWereMoved = boardWereMoved || true
+                }
+            }
+        }
+        Direction.RIGHT -> {
+            for (i in 1..width) {
+                if (moveValuesInRowOrColumn(getRow(i, width downTo 1))) {
+                    boardWereMoved = boardWereMoved || true
+                }
+            }
+        }
+        Direction.DOWN -> {
+            for (j in 1..width) {
+                if (moveValuesInRowOrColumn(getColumn(width downTo 1, j))) {
+                    boardWereMoved = boardWereMoved || true
+                }
+            }
+        }
+        Direction.LEFT -> {
+            for (i in 1..width) {
+                if (moveValuesInRowOrColumn(getRow(i, 1..width))) {
+                    boardWereMoved = boardWereMoved || true
+                }
+            }
+        }
+    }
+    return boardWereMoved
 }

@@ -1,4 +1,4 @@
-package games.gameOfFifteen
+package weekfive.games.gameOfFifteen
 
 /*
  * This function should return the parity of the permutation.
@@ -11,5 +11,16 @@ package games.gameOfFifteen
  * Thus the initial permutation should be correct.
  */
 fun isEven(permutation: List<Int>): Boolean {
-    TODO()
+    val list = permutation.toMutableList()
+    var count = 0
+    for (i in 0..list.lastIndex) {
+        for (j in 0..list.lastIndex) {
+            if (i < j && list[i] > list[j]) {
+                list[i] = list[j].also { list[j] = list[i] }
+                count++
+            }
+        }
+    }
+
+    return count.rem(2) ==0
 }

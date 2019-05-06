@@ -1,6 +1,6 @@
-package games.ui
+package weekfive.games.ui
 
-import games.gameOfFifteen.newGameOfFifteen
+import weekfive.games.gameOfFifteen.newGameOfFifteen
 import java.awt.Color
 
 object GameOfFifteenSettings : GameSettings("Game of fifteen", Color(0x909090)) {

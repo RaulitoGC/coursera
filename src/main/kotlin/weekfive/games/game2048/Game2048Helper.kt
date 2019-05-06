@@ -1,6 +1,4 @@
-package games.game2048
-
-import java.util.*
+package weekfive.games.game2048
 
 /*
  * This function moves all the non-null elements to the beginning of the list

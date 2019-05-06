@@ -1,7 +1,7 @@
-package games.game2048
+package weekfive.games.game2048
 
-import board.Cell
-import board.GameBoard
+import weekfour.Cell
+import weekfour.GameBoard
 import kotlin.random.Random
 
 interface Game2048Initializer<T> {
@@ -11,9 +11,9 @@ interface Game2048Initializer<T> {
     fun nextValue(board: GameBoard<T?>): Pair<Cell, T>?
 }
 
-object RandomGame2048Initializer: Game2048Initializer<Int> {
+object RandomGame2048Initializer : Game2048Initializer<Int> {
     private fun generateRandomStartValue(): Int =
-            if (Random.nextInt(10) == 9) 4 else 2
+        if (Random.nextInt(10) == 9) 4 else 2
 
     /*
      * Generate a random value and a random cell among free cells
@@ -23,9 +23,15 @@ object RandomGame2048Initializer: Game2048Initializer<Int> {
      * If the board is full return null.
      */
     override fun nextValue(board: GameBoard<Int?>): Pair<Cell, Int>? {
-        var list = board.filter {  }
-        println("list")
-        print(list)
-        return Pair(Cell(2,1),1)
+        val freeCellList = mutableListOf<Cell>()
+        board.getAllCells().forEach { cell ->
+            if (board[cell] == null) {
+                freeCellList.add(cell)
+            }
+        }
+
+        if (freeCellList.size == 0) return null
+
+        return Pair(freeCellList[Random.nextInt(freeCellList.size)], generateRandomStartValue())
     }
 }

@@ -1,8 +1,8 @@
 // drawing based on https://github.com/bulenkov/2048
-package games.ui
+package weekfive.games.ui
 
-import board.Direction
-import games.game.Game
+import weekfive.games.game.Game
+import weekfour.Direction
 import java.awt.*
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
