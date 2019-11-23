@@ -10,8 +10,6 @@ class CanvasPathView(context: Context, attrs: AttributeSet? = null) : View(conte
     private val path = Path()
     private val redFillPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val blackPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private lateinit var linearGradient: LinearGradient
-    private val gradientPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     init {
 
